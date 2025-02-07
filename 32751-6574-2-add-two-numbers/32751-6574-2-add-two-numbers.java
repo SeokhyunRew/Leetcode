@@ -15,32 +15,28 @@ class Solution {
         ListNode dummy = new ListNode(0);
         ListNode answer = dummy;
 
-        StringBuilder sb_1 = new StringBuilder();
-        StringBuilder sb_2 = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        int temp = 0;
 
-        while (l1 != null) {
-            sb_1.append(l1.val);
-            l1 = l1.next;
+        while (l1 != null || l2 != null) {
+            int l1_num = (l1 != null) ? l1.val : 0;
+            int l2_num = (l2 != null) ? l2.val : 0;
+
+            sb.append((l1_num + l2_num + temp) % 10);
+
+            if ((l1_num + l2_num + temp) >= 10) 
+                temp = 1; 
+            else 
+                temp = 0;  
+
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
         }
 
-        while (l2 != null) {
-            sb_2.append(l2.val);
-            l2 = l2.next;
-        }
+        if(temp==1) sb.append(temp);
 
-        sb_1.reverse();
-        sb_2.reverse();
 
-        // \U0001f525 `BigInteger` 사용하여 초대형 숫자도 변환 가능
-        BigInteger num1 = new BigInteger(sb_1.toString());
-        BigInteger num2 = new BigInteger(sb_2.toString());
-        BigInteger sum = num1.add(num2);
-
-        sb_1.setLength(0);
-        sb_1.append(sum.toString());
-        sb_1.reverse();
-
-        for (char c : sb_1.toString().toCharArray()) {
+        for (char c : sb.toString().toCharArray()) {
             answer.next = new ListNode(c - '0');
             answer = answer.next;
         }
