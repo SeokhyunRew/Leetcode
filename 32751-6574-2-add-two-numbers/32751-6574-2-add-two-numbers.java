@@ -35,7 +35,6 @@ class Solution {
 
         if(temp==1) sb.append(temp);
 
-
         for (char c : sb.toString().toCharArray()) {
             answer.next = new ListNode(c - '0');
             answer = answer.next;
