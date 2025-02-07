@@ -7,18 +7,12 @@ class Solution {
 
         Arrays.sort(copy_array);
 
-        for (int i = 0; i < copy_array.length / 2; i++) {
-            int temp = copy_array[i];
-            copy_array[i] = copy_array[copy_array.length - 1 - i];
-            copy_array[copy_array.length - 1 - i] = temp;
-        }
-
-        for(int i=0; i<copy_array.length; i++){
-            if(i<3){
-                map.put(copy_array[i], s[i]);
+        for(int i=copy_array.length-1; i>=0; i--){
+            if(i>copy_array.length-4){
+                map.put(copy_array[i], s[copy_array.length-i-1]);
                 continue;
             }
-            map.put(copy_array[i], String.valueOf(i+1));
+            map.put(copy_array[i], String.valueOf(copy_array.length-i));
         }
 
         for(int i=0; i<score.length; i++){
