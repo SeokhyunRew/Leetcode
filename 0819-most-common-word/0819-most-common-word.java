@@ -3,16 +3,19 @@ class Solution {
         
         paragraph = paragraph.toLowerCase();
         paragraph = paragraph.replaceAll("[!?',;.]"," ");
-        
-        for(int i=0; i<banned.length; i++) paragraph = paragraph.replaceAll(banned[i].toLowerCase(), "");
-        
         String[] paragraphArr = paragraph.split("\\s+");
+
+        Set<String> set = new HashSet<>();
         Map<String, Integer> map = new HashMap<>();
 
-        for(int i=0; i<paragraphArr.length; i++) {
-            String currWord = paragraphArr[i];
-           if(!currWord.isEmpty()) map.put(currWord, map.getOrDefault(currWord, 0)+1);
+        for(String word : banned) set.add(word.toLowerCase());
+
+        for(String word : paragraphArr) {
+            if(!word.isEmpty() && !set.contains(word)) {
+                map.put(word, map.getOrDefault(word, 0) + 1);
+            }
         }
+
         int max = Integer.MIN_VALUE;
         String answer="";
 
