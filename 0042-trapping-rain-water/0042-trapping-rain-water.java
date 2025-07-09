@@ -1,25 +1,24 @@
 class Solution {
     public int trap(int[] height) {
-        int len = height.length;
-        int[] copy = Arrays.copyOf(height, len);
-
-        Arrays.sort(copy);
-
-        int maxHeight = copy[len-1];
+        Stack<Integer> stack = new Stack<>();
         int answer = 0;
+        int current = 0;
 
-        for(int i=1; i<=maxHeight; i++){
-            int beforeIndex=-1;
-            for(int j=0; j<len; j++){
-                int currHeight = height[j];
-                if(currHeight>=i){
-                    if(beforeIndex==-1) beforeIndex=j;
-                    else{
-                        answer += j-beforeIndex-1;
-                        beforeIndex = j;
-                    }
-                } 
+        while (current < height.length) {
+            // 현재 높이가 이전 스택 top보다 높으면 물이 고일 수 있음
+            while (!stack.isEmpty() && height[current] > height[stack.peek()]) {
+                int bottom = stack.pop(); // 물 바닥 높이
+
+                if (stack.isEmpty()) break;
+
+                int left = stack.peek(); // 왼쪽 벽
+                int width = current - left - 1;
+                int boundedHeight = Math.min(height[left], height[current]) - height[bottom];
+                answer += width * boundedHeight;
             }
+
+            stack.push(current);
+            current++;
         }
 
         return answer;
