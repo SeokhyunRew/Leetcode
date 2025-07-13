@@ -10,23 +10,33 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode startNode = new ListNode(-1);
-        ListNode currNode = startNode;
+        ListNode dummy = new ListNode(-1); // 결과 리스트 시작점
+        ListNode current = dummy;
 
-        while(list1!=null && list2!=null){
-            if(list1.val<list2.val){
-                currNode.next=list1;
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                current.next = new ListNode(list1.val); // val만 복사
                 list1 = list1.next;
-            }else{
-                currNode.next=list2;
+            } else {
+                current.next = new ListNode(list2.val); // val만 복사
                 list2 = list2.next;
             }
-            currNode = currNode.next;
+            current = current.next;
         }
 
-        if (list1 != null) currNode.next = list1;
-        if (list2 != null) currNode.next = list2;
+        // 남은 노드들 복사해서 붙이기
+        while (list1 != null) {
+            current.next = new ListNode(list1.val);
+            list1 = list1.next;
+            current = current.next;
+        }
 
-        return startNode.next;
+        while (list2 != null) {
+            current.next = new ListNode(list2.val);
+            list2 = list2.next;
+            current = current.next;
+        }
+
+        return dummy.next;
     }
 }
