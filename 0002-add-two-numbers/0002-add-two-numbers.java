@@ -8,27 +8,36 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+import java.math.BigInteger;
+
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode dummy = new ListNode(0); 
-        ListNode current = dummy;
-        int carry = 0;
+        StringBuilder num1 = new StringBuilder();
+        StringBuilder num2 = new StringBuilder();
 
-        while (l1 != null || l2 != null || carry != 0) {
-            int num1 = (l1 != null) ? l1.val : 0;
-            int num2 = (l2 != null) ? l2.val : 0;
+        while(l1 != null || l2 != null){
+            if(l1!=null){
+	            num1.insert(0, l1.val);
+              l1 = l1.next;
+            }
 
-            int sum = num1 + num2 + carry;
-            carry = sum / 10;
-            int digit = sum % 10;
-
-            current.next = new ListNode(digit);
-            current = current.next;
-
-            if (l1 != null) l1 = l1.next;
-            if (l2 != null) l2 = l2.next;
+            if(l2!=null){
+	            num2.insert(0, l2.val);
+              l2 = l2.next;
+            }
         }
 
-        return dummy.next;
+        BigInteger sumNumber = new BigInteger(num1.toString()).add(new BigInteger(num2.toString()));
+
+        String sumStr = String.valueOf(sumNumber);
+        ListNode answer = null;
+
+        for (int i = 0; i < sumStr.length(); i++) {
+            int digit = sumStr.charAt(i) - '0'; 
+            answer = new ListNode(digit, answer); 
+        }
+
+        return answer;
+        
     }
 }
