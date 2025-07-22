@@ -20,7 +20,7 @@ class Solution {
             currHead = (currHead.next != null) ? currHead.next.next : null;
         }
 
-        head = head.next;
+        head = (head != null) ? head.next : null;
 
         while(head != null){
             currAnswer.next = new ListNode(head.val);
