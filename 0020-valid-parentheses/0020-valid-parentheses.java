@@ -9,16 +9,15 @@ class Solution {
                 if (stack.isEmpty()) return false;
                 switch (c){
                     case ')':
-                        c='(';
+                        if(stack.peek()!='(') return false;
                         break;
                     case '}':
-                        c='{';
+                        if(stack.peek()!='{') return false;
                         break;
                     case ']':
-                        c='[';
+                        if(stack.peek()!='[') return false;
                         break;
                 }
-                if(stack.peek()!=c) return false;
                 stack.pop();
             }
         }
