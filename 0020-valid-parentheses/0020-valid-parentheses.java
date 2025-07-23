@@ -7,18 +7,18 @@ class Solution {
             if(c=='('||c=='{'||c=='[') stack.push(c);
             else{
                 if (stack.isEmpty()) return false;
+                char temp = stack.pop();
                 switch (c){
                     case ')':
-                        if(stack.peek()!='(') return false;
+                        if(temp!='(') return false;
                         break;
                     case '}':
-                        if(stack.peek()!='{') return false;
+                        if(temp!='{') return false;
                         break;
                     case ']':
-                        if(stack.peek()!='[') return false;
+                        if(temp!='[') return false;
                         break;
                 }
-                stack.pop();
             }
         }
 
