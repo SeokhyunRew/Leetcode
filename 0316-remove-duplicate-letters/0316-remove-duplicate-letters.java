@@ -4,23 +4,22 @@ class Solution {
 
         Set<Character> allComponent = toSortedSet(s); 
 
-        for(char c:allComponent){
+        for(char c : allComponent){
             String suffix = s.substring(s.indexOf(c));
+
             if(allComponent.equals(toSortedSet(suffix))){
-                return c + removeDuplicateLetters(suffix.replace(String.valueOf(c),""));
+                return c + removeDuplicateLetters(suffix.replaceAll(String.valueOf(c), ""));
             }
         }
+
         return "";
     }
 
-    private Set<Character> toSortedSet(String s){
+    private static Set<Character> toSortedSet(String s){
         Set<Character> set = new TreeSet<>();
 
-        for(int i=0; i<s.length(); i++){
-            set.add(s.charAt(i));
-        }
+        for(char c : s.toCharArray()) set.add(c);
 
         return set;
     }
-
 }
