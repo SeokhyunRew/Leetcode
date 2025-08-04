@@ -23,7 +23,10 @@ class Solution {
 
     private void dfs(int start, Map<Integer, List<Integer>> mapRoute, Set<Integer> isUsed, Set<Integer> visited){
 
-        if(!mapRoute.containsKey(start)) return;
+        if(!mapRoute.containsKey(start)){
+            visited.add(start);
+            return;
+        }
         if(visited.contains(start)) return;
 
         List<Integer> canGo = mapRoute.get(start);
