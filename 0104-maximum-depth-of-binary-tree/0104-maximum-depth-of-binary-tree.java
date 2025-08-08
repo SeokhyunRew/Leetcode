@@ -17,16 +17,18 @@ class Solution {
     int answer = 0;
 
     public int maxDepth(TreeNode root) {
+        if(root==null) return 0;
         dfs(root, 1);
+
         return answer;
     }
 
-    private void dfs(TreeNode curr, int depth) {
-        if (curr == null) return;
+    private void dfs(TreeNode curr, int dist){
+        
+        if(curr.left != null) dfs(curr.left, dist+1);
+        else answer = (answer<dist)?dist:answer;
 
-        answer = Math.max(answer, depth);
-
-        dfs(curr.left, depth + 1);
-        dfs(curr.right, depth + 1);
+        if(curr.right != null) dfs(curr.right, dist+1);
+        else answer = (answer<dist)?dist:answer;
     }
 }
