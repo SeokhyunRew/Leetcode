@@ -16,19 +16,21 @@
 class Solution {
     public boolean isBalanced(TreeNode root) {
         
-        int answer = dfs(root, 0);
+        int answer = dfs(root);
 
         return (answer==-1)?false:true;
     }
 
-    private int dfs(TreeNode curr, int height){
-        if(curr==null) return height;
+    private int dfs(TreeNode curr){
+        if(curr==null) return 0;
 
-        int left = dfs(curr.left, height+1);
-        int right = dfs(curr.right, height+1);
+        int left = dfs(curr.left);
+        int right = dfs(curr.right);
 
         if(Math.abs(left-right)>1) return -1;
 
-        return Math.max(left, right);
+        if(left==-1||right==-1) return -1;
+
+        return Math.max(left, right)+1;
     }
 }
