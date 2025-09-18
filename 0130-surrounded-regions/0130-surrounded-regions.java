@@ -29,11 +29,11 @@ class Solution {
         if(x < 0 || x >= board.length || y < 0 || y >= board[0].length) return;
         if(board[x][y] != 'O') return;
 
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
+
         board[x][y] = 'V'; 
 
-        dfs(board, x-1, y);
-        dfs(board, x+1, y);
-        dfs(board, x, y-1);
-        dfs(board, x, y+1);
+        for(int i=0; i<4; i++) dfs(board, x+dx[i], y+dy[i]);
     }
 }
