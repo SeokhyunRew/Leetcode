@@ -26,14 +26,18 @@ class Solution {
     }
 
     private void dfs(char[][] board, int x, int y){
-        if(x < 0 || x >= board.length || y < 0 || y >= board[0].length) return;
-        if(board[x][y] != 'O') return;
-
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
-
+        
+        if(board[x][y] != 'O') return;
         board[x][y] = 'V'; 
 
-        for(int i=0; i<4; i++) dfs(board, x+dx[i], y+dy[i]);
+        for(int i=0; i<4; i++){
+            if(x+dx[i]>=0 &&
+               y+dy[i]>=0 &&
+               x+dx[i]<board.length &&
+               y+dy[i]<board[0].length
+            ) dfs(board, x+dx[i], y+dy[i]);
+        }
     }
 }
