@@ -15,10 +15,7 @@ class Solution {
                 else if(j==lastIndex) dp[i][j] = dp[i-1][lastIndex-1]+triangle.get(i).get(lastIndex);
                 else dp[i][j] = Math.min(dp[i-1][j-1],dp[i-1][j])+triangle.get(i).get(j);
 
-                if(i==triangle.size()-1){
-                    answer.offer(dp[i][j]);
-                    System.out.println(dp[i][j]);
-                }
+                if(i==triangle.size()-1) answer.offer(dp[i][j]);
             }
         }
 
