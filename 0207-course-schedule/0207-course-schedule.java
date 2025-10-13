@@ -13,6 +13,7 @@ class Solution {
         if(prerequisites.length<=1) return true;
 
         for(int start : mapRoute.keySet()){
+            if(visited.contains(start)) continue;;
             isUsed.add(start);
             dfs(start, mapRoute, isUsed, visited);
             isUsed.remove(start);
